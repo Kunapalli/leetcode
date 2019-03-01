@@ -39,17 +39,22 @@ def largestRectangleArea(heights):
     :rtype: int
     """
     n = len(heights)
+    
     prevBestArea = 0
     i = 0
     stack = []
     
     while i < n + 1:
+        print("stack beg = {}, i = {}".format(stack, i))
+        
         cur = -1 if i == n else heights[i]
         
         while stack and cur <= heights[stack[-1]]:
             h = heights[stack.pop()]
             w = i if not stack else (i - stack[-1] - 1)
+            print("prev1 {}".format(prevBestArea))
             prevBestArea = max(prevBestArea, h*w)
+            print("prev12 {}, h {}, w {}, stack = {}, i = {}".format(prevBestArea, h, w, stack, i)) 
         stack.append(i)
         i += 1
     return prevBestArea
