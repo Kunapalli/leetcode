@@ -22,8 +22,8 @@
 # if < 0, then we need to move right (since list is sorted, subsequent numbers are >= current element)
 # if < 0, then we need to move left (since list is sorted, subsequent numbers are <= current element)
 # if = 0, we store this triple.
-# and as long as subsequent elements to the right are the same as current element, increment left
-# and as long as subsequent elements to the left are the same as current element, decrement right
+# and as long as subsequent elements to the right are the same as nums[left], increment left
+# and as long as subsequent elements to the left are the same as nums[right], decrement right
 
 def threeSum(nums):
     
