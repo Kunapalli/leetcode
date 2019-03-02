@@ -1,5 +1,5 @@
 # https://leetcode.com/problems/4sum/
-#Given an array nums of n integers and an integer target, are there elements a, b, c, and d in nums
+# Given an array nums of n integers and an integer target, are there elements a, b, c, and d in nums
 # such that a + b + c + d = target? Find all unique quadruplets in the array which gives the sum of target.
 # This seems simple. Two for loops, for each of i,j find if the remaining have a two sum.
 # The key thing from optimization perspective are the early termination cases.
@@ -71,7 +71,7 @@ def twoSum(nums, a, b, target, L, store):
                 right -= 1
 
 
-print(fourSum([-3,0,7,-2,-6,-5,1,5,-1,-8,-9,-8,7,1,1,3,1,10], 0))
+#print(fourSum([-3,0,7,-2,-6,-5,1,5,-1,-8,-9,-8,7,1,1,3,1,10], 0))
 #print(fourSum([5,5,3,5,1,-5,1,-2],4))
 #print(fourSum([-1,2,2,-5,0,-1,4], 3))
 #c = [-3,0,7,-2,-6,-5,1,5,-1,-8,-9,-8,7,1,1,3,1,10]
