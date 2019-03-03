@@ -10,6 +10,28 @@ Note:
 s could be empty and contains only lowercase letters a-z.
 p could be empty and contains only lowercase letters a-z, and characters like . or *.
 '''
+# same as isMatch without comments
+
+def isMatch2(s, p):
+    dp = [[False, ] * (len(s) + 1) for i in range(len(p) + 1)]
+    dp[0][0] = True
+
+    for i in range(1, len(p) + 1):
+        if p[i - 1] == '*':
+            dp[i][0] = dp[i - 2][0]
+
+    for pi in range(1, len(p) + 1):
+        for si in range(1, len(s) + 1):
+            if p[pi - 1] == '*':
+                dp[pi][si] = dp[pi - 2][si]
+                if s[si - 1] == p[pi - 2] or p[pi - 2] == '.':
+                    dp[pi][si] = dp[pi][si] or dp[pi][si - 1]
+            else:
+                dp[pi][si] = (s[si - 1] == p[pi - 1] or p[pi - 1] == '.') and dp[pi - 1][si - 1]
+
+    return dp[-1][-1]
+
+
 def isMatch(s, p):
     # what does dp contain?
     # dp[pi][si] is True if pattern ending just before pi matches string ending just before si
@@ -36,14 +58,17 @@ def isMatch(s, p):
     for pi in range(1, len(p) + 1):
         for si in range(1, len(s) + 1):
             if p[pi-1] == '*':
-                # two possibilities just as in the recursion solution. Either char* matches null or not.
-                # option 1: assume char* matches null. So the pattern ending just before pi-2
-                # matches string ending in si. OR
-                # option 2: asume char* does not match null.
-                #      if p-2 matches s-1, use whatever is in dp[pi][si-1]
-                dp[pi][si] = dp[pi-2][si] or ((s[si-1] == p[pi-2] or p[pi-2] == '.') and dp[pi][si-1])
+                # two possibilities just as in the recursion solution
+                # in recursion, we said if next char is *, we do s,p+2(this was when char* matched null) or
+                # s+1,p(first char matched)
+                # here, if p-1 is * then dp[pi-2][si] implies char* has not matched null
+                # if p-2 matches s-1 then we use dp[pi][si-1], implies char* matched null
+                # Note: when pi is 1, this becomes dp[-1][1] or'ed with dp[1][0]. Both are false.
+                dp[pi][si] = dp[pi-2][si] 
+                if s[si-1] == p[pi-2] or p[pi-2] == '.':
+                    dp[pi][si] = dp[pi][si] or dp[pi][si-1]
             else:
-                # pattern not char*, so check if prev chars are equal and look at p-1,s-1
+                # prev char is not a star, so check if prev chars are equal and look at p-1,s-1
                 dp[pi][si] = (s[si-1] == p[pi-1] or p[pi-1] == '.') and dp[pi-1][si-1]
 
     return dp[-1][-1]
