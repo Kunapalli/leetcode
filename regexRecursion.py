@@ -21,8 +21,8 @@ def isMatch2(s, p, si, pi):
 
     # suppose s1 = aabb, s2 = bb and p = a*b*. We don't know whether our string s is like s1 or s2.
     # so we have two possibilities.
-    # 1. we assume a* matches null as in s2. Then compare s2 with p+2
-    # 2. a* matches first a in s1. Then compare s1+1 with p
+    # 1. we assume a* matches null as in s2. Then compare s with p+2
+    # 2. a* matches first a in s1. Then compare s+1 with p
     if incs:
         r = isMatch2(s, p, si, pi + 2) # assumes char* matches null
         if hfcm:
