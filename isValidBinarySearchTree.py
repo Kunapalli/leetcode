@@ -31,7 +31,7 @@ def isValidBSTHelper(root: TreeNode, min_, max_):
         # consider root at 70. All children > 50 and < 70
         left = isValidBSTHelper(root.left, min_, min(root.val, max_)) 
     if root.right:
-        # consider root at 135. All children > 100 and < 130
+        # consider root at 130. All children > 100 and < 130
         right = isValidBSTHelper(root.right, max(root.val, min_), max_)
 
     return left and right
