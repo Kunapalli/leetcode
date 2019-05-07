@@ -26,7 +26,7 @@ def maxPathSum(root):
 def helper(root, curmax):
     if root is None:
         return None, False
-
+    print("in helper: root is ", root.val)
     m = root.val
         
     (maxleft, vialeftroot) = helper(root.left, curmax)
@@ -55,19 +55,27 @@ def helper(root, curmax):
         
     else:
         if vialeftroot and viarightroot:
+            print("both: m = {}, maxleft {}, maxright {}".format(m, maxleft, maxright))
             curmax[0] = max(curmax[0], m + maxleft + maxright)
+            print("1: curmax is ", curmax[0])
             return max(m + maxleft, m + maxright), True
         
         elif vialeftroot:
+            print("vialeft: m = {}, maxleft {}".format(m, maxleft))
             curmax[0] = max(curmax[0], m + maxleft)
+            print("2: curmax is ", curmax[0])
             return m + maxleft, True
         
         elif viarightroot:
+            print("viaright: m = {}, maxright {}".format(m, maxright))            
             curmax[0] = max(curmax[0], m + maxright)
+            print("3: curmax is ", curmax[0])
             return m + maxright, True
         
         else:
+            print("vianone: m = {}".format(m)) 
             curmax[0] = max(curmax[0], m)
+            print("4: curmax is ", curmax[0])                
             return m, True
         
         
@@ -99,6 +107,6 @@ def printTree(root):
 
 #f2 = TreeNode(-6, TreeNode(5), TreeNode(9))
 #f1 = TreeNode(8, TreeNode(9), f2)
-#printTree(f7)
-#print("****")
+printTree(f7)
+print("****")
 print(maxPathSum(f7))
